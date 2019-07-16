@@ -1,0 +1,65 @@
+<div class="box">
+    <h2 class="text-uppercase">New account</h2>
+    <p class="lead">Not our registered customer yet?</p>
+    <p>With registration with us new world of fashion, fantastic discounts and much more opens to you! The whole process will not take you more than a minute!</p>
+    <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+    <hr>
+
+    <form #registerForm="ngForm">
+        <!--         {{registerForm.valid}} {{registerForm.invalid}} {{registerForm.dirty}} {{registerForm.touched}}-->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" class="form-control" ngModel pattern='[A-Za-z]*' juriName="miny" required minlength='3' #name="ngModel">
+            <!--             {{name.valid}} {{name.invalid}} {{name.dirty}} {{name.errors}}-->
+            <div *ngIf="(registerForm.submitted || name.dirty) && name.errors" class="text-danger">
+                <span *ngIf="name.errors.minlength">name should contain min 5 letters</span>
+                <span *ngIf="name.errors.required">name is required</span>
+                <span *ngIf="name.errors.pattern">name is not valid</span>
+                <span *ngIf="name.errors.juriName">name is not miny {{name.errors.juriName}}</span>
+
+
+                <!--                <span *ngIf="name.errors.juriName">name cannot be Bob</span>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="maritalStatus">Marital Status </label>
+            <div>
+                <input type="radio" value="Single" ngModel name="maritalStatus" required #maritalStatus="ngModel">
+                <label> Single</label>
+            </div>
+            <div>
+                <input type="radio" value="Married" ngModel name="maritalStatus" required #maritalStatus="ngModel">
+                <label> Married</label>
+            </div>
+            <div class="text-danger" *ngIf="(registerForm.submitted||maritalStatus.dirty) && maritalStatus.errors">
+                <span *ngIf="maritalStatus.errors.required">Marital Status is required</span>
+            </div>
+        </div>
+        <div class="form-group" *ngIf="maritalStatus.value=='Married'">
+            <label for="Sname">Spouse Name</label>
+            <input type="text" name="Sname" class="form-control" id="Sname" ngModel #Sname="ngModel" required>
+            <div class="text-danger" *ngIf="(registerForm.submitted||Sname.dirty) && Sname.errors">
+                <span *ngIf="Sname.errors.required">Marital Status is required</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email-login">Email</label>
+            <input id="email-login" type="email" class="form-control" ngModel email required name="email" #email="ngModel">
+            <div *ngIf="(registerForm.submitted || email.dirty) && (email.errors || email.invalid)">
+                <span *ngIf="email.errors.required">email is required</span>
+                <span *ngIf="email.errors.email">email is not valid</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password-login">Password</label>
+            <input id="password-login" type="password" class="form-control" ngModel required name="password" #password="ngModel">
+            <div *ngIf="(registerForm.submitted || password.dirty) && (password.errors || password.invalid)">
+                <span *ngIf="password.errors.required">email is required</span>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" [disabled]="registerForm.invalid" class="btn btn-template-outlined"><i class="fa fa-user-md" (click)="submit()"></i> Register</button>
+        </div>
+    </form>
+
+</div>

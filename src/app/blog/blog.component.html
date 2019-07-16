@@ -1,0 +1,41 @@
+ <div id="heading-breadcrumbs" class="border-top-0 border-bottom-0">
+        <div class="container">
+          <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+              <h1 class="h2">Blog Listing</h1>
+            </div>
+            <div class="col-md-5">
+              <ul class="breadcrumb d-flex justify-content-end">
+                <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+                <li class="breadcrumb-item active">Blog Listing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="content">
+        <div class="container">
+          <div class="row bar">
+            <div id="blog-listing-medium"  class="col-md-12" >
+              <section class="post" *ngFor="let blog of blogList" appDirectiveWithInput [appDirectiveWithInput]="myColor" defaultColor="blue">
+                <div class="row" >
+                  <div class="col-md-4">
+                    <div class="image" *ngIf="imageUrl"><a href="blog-post.html"><img src='{{imageUrl+"/"+blog.image}}' alt="{{blog.imageDescription}}" class="img-fluid"></a></div>
+                  </div>
+                  <div class="col-md-8">
+                    <h2 class="h3 mt-0"><a href="post.htmls">Fashion now</a></h2>
+                    <div class="d-flex flex-wrap justify-content-between text-xs">
+                      <p class="author-category">By <a href="#">{{blog.name | name}}</a> in <a href="blog.html">Webdesign</a></p>
+                        <p class="date-comments"><a href="blog-post.html"><i class="fa fa-calendar-o"></i> {{blog.date|date: 'fullDate'}}</a>
+                            <a href="blog-post.html" *ngIf="blog.comments;else elseBlock"><i class="fa fa-comment-o"></i> {{blog.comments.length}} Comments</a><ng-template #elseBlock><a>No Comments</a></ng-template>
+                        </p>
+                    </div>
+                    <p class="intro">{{blog.description}}</p>
+                    <p class="read-more text-right"><a routerLink="{{blog.id}}" class="btn btn-template-outlined">Continue reading</a></p>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
