@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyIfDirective } from '../../shared/directives/my-if.directive';
 import { Observable } from 'rxjs';
+import {ServiceService} from '../../shared/services/service.service';
 
 @Component({
   selector: 'app-landing',
@@ -9,10 +10,10 @@ import { Observable } from 'rxjs';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private serviceService:ServiceService) { }
 
   ngOnInit() {
-      
+     
       //promise and observable
       
       const promise = new Promise(() => {
@@ -56,6 +57,11 @@ const logSecondsPromise =
       
       
 
+  }
+
+  click(){
+    this.serviceService.counter+=1;
+    this.serviceService.displayCounter();
   }
 
 }
